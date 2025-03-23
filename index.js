@@ -47,8 +47,6 @@ app.get("/check-links-stream", async (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
   res.flushHeaders(); // Flush the headers
-
-  res.write(`data: Hello from SSE\n\n`); // Example event
   const { url } = req.query;
   const cleanedUrl = url.endsWith("/") ? url.slice(0, -1) : url;
 
