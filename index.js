@@ -6,11 +6,7 @@ import express from 'express';
 import cors from 'cors';
 const app = express();
 const port = 5200;
-app.use(cors({
-  origin: '*',
-  methods: 'GET,POST',
-  allowedHeaders: 'Content-Type',
-}));
+app.use(cors());
 app.use(express.json());
 
 const axiosInstance = axios.create({
@@ -41,22 +37,8 @@ const isExcludedUrl = (url) => {
 };
 
 const visitedUrls = new Set();
-app.get('/static-data', (req, res) => {
-  res.json({
-    message: "This is some static data",
-    data: [
-      { id: 1, name: "John Doe", role: "Admin" },
-      { id: 2, name: "Jane Smith", role: "User" },
-      { id: 3, name: "Alice Johnson", role: "Editor" }
-    ]
-  });
-});
+
 app.get("/check-links-stream", async (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.flushHeaders();
   const { url } = req.query;
   const cleanedUrl = url.endsWith("/") ? url.slice(0, -1) : url;
 
