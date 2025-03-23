@@ -41,12 +41,21 @@ const isExcludedUrl = (url) => {
 };
 
 const visitedUrls = new Set();
-
+app.get('/static-data', (req, res) => {
+  res.json({
+    message: "This is some static data",
+    data: [
+      { id: 1, name: "John Doe", role: "Admin" },
+      { id: 2, name: "Jane Smith", role: "User" },
+      { id: 3, name: "Alice Johnson", role: "Editor" }
+    ]
+  });
+});
 app.get("/check-links-stream", async (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
-  res.flushHeaders(); // Flush the headers
+  res.flushHeaders();
   const { url } = req.query;
   const cleanedUrl = url.endsWith("/") ? url.slice(0, -1) : url;
 
