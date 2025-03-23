@@ -7,7 +7,7 @@ import cors from 'cors';
 const app = express();
 const port = 5200;
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-deployed-frontend.com'],
+  origin: '',
   methods: 'GET,POST',
   allowedHeaders: 'Content-Type',
 }));
