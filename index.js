@@ -55,6 +55,7 @@ app.get("/check-links-stream", async (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.flushHeaders();
   const { url } = req.query;
   const cleanedUrl = url.endsWith("/") ? url.slice(0, -1) : url;
